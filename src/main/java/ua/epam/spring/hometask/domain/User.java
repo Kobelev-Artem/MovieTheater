@@ -1,5 +1,7 @@
 package ua.epam.spring.hometask.domain;
 
+import ua.epam.spring.hometask.util.IsEmail;
+
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.TreeSet;
@@ -13,6 +15,7 @@ public class User extends DomainObject {
 
     private String lastName;
 
+    @IsEmail
     private String email;
 
     private NavigableSet<Ticket> tickets = new TreeSet<>();
