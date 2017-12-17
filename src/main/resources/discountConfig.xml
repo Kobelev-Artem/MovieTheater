@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="discountService" class="ua.epam.spring.hometask.service.impl.DiscountServiceImpl">
+        <property name="discountStrategies">
+            <list>
+                <ref bean="birthdayDiscountStrategy"/>
+            </list>
+        </property>
+    </bean>
+    <!--Strategies-->
+    <bean id="birthdayDiscountStrategy" class="ua.epam.spring.hometask.service.strategy.BirthdayDiscountStrategy"/>
+    <bean id="wholesaleDiscountStrategy" class="ua.epam.spring.hometask.service.strategy.WholesaleDiscountStrategy"/>
+
+</beans>

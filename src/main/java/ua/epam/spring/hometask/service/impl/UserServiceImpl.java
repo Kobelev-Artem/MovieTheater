@@ -1,6 +1,5 @@
 package ua.epam.spring.hometask.service.impl;
 
-import org.apache.commons.lang3.NotImplementedException;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.UserService;
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getById(@Nonnull Long id) {
-        throw new NotImplementedException("error_-^^-_");
+        throw new UnsupportedOperationException("error_-^^-_");
     }
 
     @Nonnull

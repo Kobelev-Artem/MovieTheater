@@ -2,11 +2,7 @@ package ua.epam.spring.hometask.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
-import java.util.Objects;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author Yuriy_Tkach
@@ -22,6 +18,8 @@ public class Event extends DomainObject {
     private EventRating rating;
 
     private NavigableMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
+
+    private Collection<Ticket> purchasedTickets = new ArrayList<>();
 
     /**
      * Checks if event is aired on particular <code>dateTime</code> and assigns
@@ -176,6 +174,18 @@ public class Event extends DomainObject {
 
     public void setAuditoriums(NavigableMap<LocalDateTime, Auditorium> auditoriums) {
         this.auditoriums = auditoriums;
+    }
+
+    public Collection<Ticket> getPurchasedTickets() {
+        return purchasedTickets;
+    }
+
+    public void setPurchasedTickets(Collection<Ticket> purchasedTickets) {
+        this.purchasedTickets = purchasedTickets;
+    }
+
+    public void addPurchasedTicket(Ticket purchasedTicket){
+        purchasedTickets.add(purchasedTicket);
     }
 
     @Override

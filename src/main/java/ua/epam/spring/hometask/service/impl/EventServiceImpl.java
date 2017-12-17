@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class EventServiceImpl implements EventService {
 
-    @Resource
+    @Resource(name="eventDao")
     private EventDao eventDao;
 
     @Nullable
