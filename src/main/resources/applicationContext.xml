@@ -27,6 +27,10 @@
                       p:name="${auditorium.hollywood.name}"
                       p:numberOfSeats="${auditorium.hollywood.numberOfSeats}"
                       p:vipSeats="#{'${auditorium.hollywood.vipSeats}'.split(',')}"/>
+                <bean class="ua.epam.spring.hometask.domain.Auditorium"
+                      p:name="${auditorium.berlin.name}"
+                      p:numberOfSeats="${auditorium.berlin.numberOfSeats}"
+                      p:vipSeats="#{'${auditorium.berlin.vipSeats}'.split(',')}"/>
             </set>
         </property>
     </bean>

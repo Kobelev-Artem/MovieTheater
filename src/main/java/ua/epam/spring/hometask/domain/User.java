@@ -19,14 +19,13 @@ public class User extends DomainObject {
         anonymousUser = new User();
         anonymousUser.setFirstName(ANONYMOUS);
         anonymousUser.setLastName(ANONYMOUS);
-        anonymousUser.setEmail(null);
+        anonymousUser.setEmail("fake@email.com");
     }
 
     private String firstName;
 
     private String lastName;
 
-    @IsEmail
     private String email;
 
     private LocalDate birthday;
@@ -57,7 +56,7 @@ public class User extends DomainObject {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@IsEmail String email) {
         this.email = email;
     }
 

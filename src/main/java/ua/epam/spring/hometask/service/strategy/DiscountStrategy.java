@@ -9,5 +9,8 @@ import java.time.LocalDateTime;
 
 public interface DiscountStrategy {
 
+    double BIRTHDAY_DISCOUNT = 10d;
+    double WHOLESALE_DISCOUNT = 5d;
+
     double calculateDiscount(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime airDateTime, long numberOfTickets);
 }

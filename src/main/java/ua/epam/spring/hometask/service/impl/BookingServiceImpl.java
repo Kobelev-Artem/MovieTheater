@@ -3,40 +3,71 @@ package ua.epam.spring.hometask.service.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.Resource;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import ua.epam.spring.hometask.domain.*;
-import ua.epam.spring.hometask.service.AuditoriumService;
 import ua.epam.spring.hometask.service.BookingService;
+import ua.epam.spring.hometask.service.DiscountService;
 import ua.epam.spring.hometask.util.ecxeption.AuditoriumNotFoundForEventOnTime;
 import ua.epam.spring.hometask.util.ecxeption.EventNotFoundOnTime;
 
 public class BookingServiceImpl implements BookingService {
 
+    public static final double HIGH_RATING_FACTOR = 1.2;
+    public static final double WEEKEND_FACTOR = 1.3;
+
     @Resource
-    private AuditoriumService auditoriumService;
+    private DiscountService discountService;
 
     @Override
     public double getTicketsPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user, @Nonnull Set<Long> seats) {
+        checkCorrectDateAndAuditorium(event, dateTime);
+
+        double price = event.getBasePrice();
+        price = multiplyPriceForHighRatedMovies(event, price);
+        price = multiplyPriceForWeekend(dateTime, price);
+        price = multiplyPriceForVIPSeats(event, dateTime, seats, price);
+        price = applyDiscountToPrice(event, dateTime, user, seats, price);
+
+        return price;
+    }
+
+    private double applyDiscountToPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user, @Nonnull Set<Long> seats, double price) {
+        price = price * (1 - discountService.getDiscount(user, event, dateTime, seats.size()) / 100);
+        return price;
+    }
+
+    private double multiplyPriceForVIPSeats(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nonnull Set<Long> seats, double price) {
+        Auditorium auditorium = event.getAuditoriums().get(dateTime);
+        long vipSeatsCount = seats.stream().filter(s -> auditorium.getVipSeats().contains(s)).count();
+        price = price * (seats.size() + vipSeatsCount);
+        return price;
+    }
+
+    private double multiplyPriceForWeekend(@Nonnull LocalDateTime dateTime, double basePrice) {
+        if (DayOfWeek.SATURDAY.equals(dateTime.getDayOfWeek()) || DayOfWeek.SUNDAY.equals(dateTime.getDayOfWeek())){
+            basePrice = basePrice * WEEKEND_FACTOR;
+        }
+        return basePrice;
+    }
+
+    private double multiplyPriceForHighRatedMovies(@Nonnull Event event, double basePrice) {
+        if (null != event.getRating() && EventRating.HIGH.equals(event.getRating())){
+            basePrice = basePrice * HIGH_RATING_FACTOR;
+        }
+        return basePrice;
+    }
+
+    private void checkCorrectDateAndAuditorium(@Nonnull Event event, @Nonnull LocalDateTime dateTime) {
         if (!event.getAirDates().contains(dateTime)){
             throw new EventNotFoundOnTime(event, dateTime);
         }
-        if (event.getAuditoriums().keySet().contains(dateTime)){
+        if (!event.getAuditoriums().keySet().contains(dateTime)){
             throw new AuditoriumNotFoundForEventOnTime(event, dateTime);
         }
-        double basePrice = event.getBasePrice();
-        if (null != event.getRating() && EventRating.HIGH.equals(event.getRating())){
-            basePrice = basePrice * 1.2;
-        }
-        //TODO: add multiply for weekends
-        //TODO: add discount for user
-        Auditorium auditorium = event.getAuditoriums().get(dateTime);
-        long vipSeatsCount = seats.stream().filter(s -> auditorium.getVipSeats().contains(s)).count();
-
-        //set twice price for VIP seats
-        return basePrice * (seats.size() + vipSeatsCount);
     }
 
     //TODO get current user from session
@@ -61,6 +92,6 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void bookTickets(@Nonnull Set<Ticket> tickets) {
-
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 }

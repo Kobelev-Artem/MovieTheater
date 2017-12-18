@@ -1,19 +1,18 @@
 package ua.epam.spring.hometask.dao.impl.mock;
 
-import ua.epam.spring.hometask.dao.UserDao;
-import ua.epam.spring.hometask.domain.User;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import ua.epam.spring.hometask.dao.UserDao;
+import ua.epam.spring.hometask.domain.User;
+
 public class UserDaoMock implements UserDao{
 
     private static List<User> users = new ArrayList<>();
 
-    /*TODO add annotation isEmail*/
     @Nullable
     @Override
     public User getUserByEmail(@Nonnull String email) {

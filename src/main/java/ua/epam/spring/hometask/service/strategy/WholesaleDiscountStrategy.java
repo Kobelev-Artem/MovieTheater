@@ -18,6 +18,6 @@ public class WholesaleDiscountStrategy implements DiscountStrategy{
 
         long numberOfTicketsWithDiscount = countOfTickets / 10;
 
-        return (double)(numberOfTicketsWithDiscount * 50) / (double)countOfTickets;
+        return (numberOfTicketsWithDiscount * WHOLESALE_DISCOUNT * 10) / (double)countOfTickets;
     }
 }
