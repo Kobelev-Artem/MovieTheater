@@ -12,4 +12,20 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+    <servlet>
+        <servlet-name>AuditoriumServlet</servlet-name>
+        <servlet-class>ua.epam.spring.hometask.servlet.AuditoriumServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AuditoriumServlet</servlet-name>
+        <url-pattern>/auditoriums</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>
+            ua.epam.spring.hometask.listener.MyServletContextListener
+        </listener-class>
+    </listener>
+
 </web-app>
