@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -108,6 +109,7 @@ public class BookingServiceImplIntegrationTest {
         assertEquals(expectedPrice, actualPrice, DELTA);
     }
 
+    @Ignore
     @Test
     public void shouldCorrectlyCalculateBirthdayDiscount(){
         User user = new User();

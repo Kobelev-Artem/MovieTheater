@@ -1,8 +1,8 @@
 package ua.epam.spring.hometask.servlet;
 
-import org.springframework.context.ApplicationContext;
-import ua.epam.spring.hometask.domain.Auditorium;
-import ua.epam.spring.hometask.service.AuditoriumService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,8 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
+import ua.epam.spring.hometask.domain.Auditorium;
+import ua.epam.spring.hometask.service.AuditoriumService;
+
+@Configurable
 public class AuditoriumServlet extends HttpServlet {
 
+    @Autowired
     private AuditoriumService auditoriumService;
 
     @Override
@@ -27,9 +32,6 @@ public class AuditoriumServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-
-        ApplicationContext ac = (ApplicationContext) config.getServletContext().getAttribute("applicationContext");
-
-        this.auditoriumService = (AuditoriumService)ac.getBean("auditoriumService");
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 }

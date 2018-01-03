@@ -10,6 +10,8 @@
     <import resource="discountConfig.xml"/>
 
     <context:component-scan base-package="ua.epam.spring" />
+    <context:annotation-config/>
+    <context:spring-configured/>
     <context:property-placeholder location="classpath:properties/auditoriums.properties"/>
 
     <!--DAOs impls-->
