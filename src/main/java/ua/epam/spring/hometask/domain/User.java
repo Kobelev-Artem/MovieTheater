@@ -28,6 +28,8 @@ public class User extends DomainObject {
 
     private String email;
 
+    private String password;
+
     private LocalDate birthday;
 
     private NavigableSet<Ticket> tickets = new TreeSet<>();
@@ -78,6 +80,14 @@ public class User extends DomainObject {
 
     public void addTicket(Ticket ticket){
         tickets.add(ticket);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

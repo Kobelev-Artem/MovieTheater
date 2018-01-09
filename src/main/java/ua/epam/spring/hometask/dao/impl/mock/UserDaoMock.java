@@ -2,9 +2,13 @@ package ua.epam.spring.hometask.dao.impl.mock;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.PostConstruct;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
@@ -16,7 +20,11 @@ public class UserDaoMock implements UserDao{
     @Nullable
     @Override
     public User getUserByEmail(@Nonnull String email) {
-        return users.stream().filter(u -> email.equals(u.getEmail())).findFirst().orElseGet(null);
+        List<User> foundUsers = users.stream().filter(u -> email.equals(u.getEmail())).collect(Collectors.toList());
+        if (foundUsers.isEmpty()){
+            return null;
+        }
+        return foundUsers.get(0);
     }
 
     @Override
@@ -39,5 +47,24 @@ public class UserDaoMock implements UserDao{
     @Override
     public Collection<User> getAll() {
         return users;
+    }
+
+    @PostConstruct
+    public void initUsers(){
+        User user1 = new User();
+        user1.setFirstName("John");
+        user1.setLastName("Snow");
+        user1.setEmail("john.snow@gmail.com");
+        user1.setPassword("pass");
+        user1.setBirthday(LocalDate.of(1990, Month.JANUARY, 15));
+
+        User user2 = new User();
+        user2.setFirstName("Brad");
+        user2.setLastName("Pitt");
+        user2.setEmail("brad.pitt@gmail.com");
+        user2.setPassword("pass");
+        user2.setBirthday(LocalDate.of(1995, Month.DECEMBER, 31));
+
+        users.addAll(List.of(user1, user2));
     }
 }

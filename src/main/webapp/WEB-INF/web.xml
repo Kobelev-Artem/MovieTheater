@@ -8,9 +8,6 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1" id="data-fabric-web-tool">
     <display-name>Archetype Created Web Application</display-name>
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 
     <listener>
         <listener-class>
@@ -18,24 +15,61 @@
         </listener-class>
     </listener>
 
+    <!-- servlets-->
     <servlet>
         <servlet-name>AuditoriumServlet</servlet-name>
         <servlet-class>ua.epam.spring.hometask.servlet.AuditoriumServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>AuditoriumServlet</servlet-name>
-        <url-pattern>/auditoriums</url-pattern>
+        <url-pattern>/auditoriums/*</url-pattern>
     </servlet-mapping>
 
-    <!--<filter>
-        <filter-name>RequestLoggingFilter</filter-name>
-        <filter-class>RequestLoggingFilter</filter-class>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>ua.epam.spring.hometask.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>ua.epam.spring.hometask.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>HomePageServlet</servlet-name>
+        <servlet-class>ua.epam.spring.hometask.servlet.HomePageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomePageServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyAccountServlet</servlet-name>
+        <servlet-class>ua.epam.spring.hometask.servlet.MyAccountServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyAccountServlet</servlet-name>
+        <url-pattern>/myAccount</url-pattern>
+    </servlet-mapping>
+
+    <!-- filters -->
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>ua.epam.spring.hometask.filter.LoginFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>RequestLoggingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>-->
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/myAccount/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

@@ -1,5 +1,7 @@
 package ua.epam.spring.hometask.servlet;
 
+import static ua.epam.spring.hometask.constants.WebConstants.AUDITORIUM_PAGE;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -26,7 +28,7 @@ public class AuditoriumServlet extends HttpServlet {
         Set<Auditorium> auditoriums = auditoriumService.getAll();
         req.setAttribute("auditoriums", auditoriums);
 
-        req.getRequestDispatcher("auditoriums.jsp").forward(req, resp);
+        req.getRequestDispatcher(AUDITORIUM_PAGE).forward(req, resp);
     }
 
     @Override
