@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import ua.epam.spring.hometask.domain.User;
+import ua.epam.spring.hometask.util.enums.UserRole;
 
 /**
  * @author Yuriy_Tkach
@@ -18,5 +19,12 @@ public interface UserService extends AbstractDomainObjectService<User> {
      * @return found user or <code>null</code>
      */
     @Nullable User getUserByEmail(@Nonnull String email);
+
+    /**
+     * Check if user has specified role
+     * @param role
+     * @return
+     */
+    boolean hasRole(@Nonnull User user, @Nonnull UserRole role);
 
 }

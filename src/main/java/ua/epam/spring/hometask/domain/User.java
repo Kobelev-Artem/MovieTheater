@@ -1,10 +1,12 @@
 package ua.epam.spring.hometask.domain;
 
-import ua.epam.spring.hometask.util.IsEmail;
+import ua.epam.spring.hometask.util.annotation.IsEmail;
+import ua.epam.spring.hometask.util.enums.UserRole;
 
 import java.time.LocalDate;
 import java.util.NavigableSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -20,15 +22,19 @@ public class User extends DomainObject {
         anonymousUser.setFirstName(ANONYMOUS);
         anonymousUser.setLastName(ANONYMOUS);
         anonymousUser.setEmail("fake@email.com");
+        anonymousUser.setUserRoles(Set.of(UserRole.CUSTOMER));
     }
 
     private String firstName;
 
     private String lastName;
 
+    @IsEmail
     private String email;
 
     private String password;
+
+    private Set<UserRole> userRoles;
 
     private LocalDate birthday;
 
@@ -88,6 +94,18 @@ public class User extends DomainObject {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+    public void addUserRole(UserRole role){
+        this.userRoles.add(role);
     }
 
     @Override

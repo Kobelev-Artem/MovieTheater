@@ -8,10 +8,12 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
+import ua.epam.spring.hometask.util.enums.UserRole;
 
 public class UserDaoMock implements UserDao{
 
@@ -57,6 +59,7 @@ public class UserDaoMock implements UserDao{
         user1.setEmail("john.snow@gmail.com");
         user1.setPassword("pass");
         user1.setBirthday(LocalDate.of(1990, Month.JANUARY, 15));
+        user1.setUserRoles(Set.of(UserRole.CUSTOMER, UserRole.ADMIN));
 
         User user2 = new User();
         user2.setFirstName("Brad");
@@ -64,6 +67,7 @@ public class UserDaoMock implements UserDao{
         user2.setEmail("brad.pitt@gmail.com");
         user2.setPassword("pass");
         user2.setBirthday(LocalDate.of(1995, Month.DECEMBER, 31));
+        user2.setUserRoles(Set.of(UserRole.CUSTOMER));
 
         users.addAll(List.of(user1, user2));
     }

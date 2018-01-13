@@ -1,4 +1,4 @@
-package ua.epam.spring.hometask.util;
+package ua.epam.spring.hometask.util.annotation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -3,6 +3,7 @@ package ua.epam.spring.hometask.service.impl;
 import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.UserService;
+import ua.epam.spring.hometask.util.enums.UserRole;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -18,6 +19,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserByEmail(@Nonnull String email) {
         return userDao.getUserByEmail(email);
+    }
+
+    @Override
+    public boolean hasRole(@Nonnull User user, @Nonnull UserRole role) {
+        return user.getUserRoles().contains(role);
     }
 
     @Override
