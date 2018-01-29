@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -41,7 +40,7 @@ public class BookingServiceImplIntegrationTest {
     private Event midRatedEvent;
     private LocalDateTime SATURDAY_DATE_TIME = LocalDateTime.of(2017, 12, 23, 22, 00);
     private LocalDateTime MONDAY_DATE_TIME = LocalDateTime.of(2017, 12, 25, 22, 00);
-    private LocalDate WENSDAY_DATE = LocalDate.of(1990, 12, 27);
+    private LocalDate WEDNESDAY_DATE = LocalDate.of(1990, 12, 27);
 
     @Before
     public void setUp(){
@@ -109,11 +108,10 @@ public class BookingServiceImplIntegrationTest {
         assertEquals(expectedPrice, actualPrice, DELTA);
     }
 
-    @Ignore
     @Test
     public void shouldCorrectlyCalculateBirthdayDiscount(){
         User user = new User();
-        user.setBirthday(WENSDAY_DATE);
+        user.setBirthday(WEDNESDAY_DATE);
 
         double actualPrice = bookingService.getTicketsPrice(midRatedEvent, MONDAY_DATE_TIME, user, Set.of(91l,92l));
 

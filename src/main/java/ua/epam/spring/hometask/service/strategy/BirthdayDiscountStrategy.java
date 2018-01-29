@@ -17,10 +17,10 @@ public class BirthdayDiscountStrategy implements DiscountStrategy{
     public double calculateDiscount(@Nullable User user, @Nonnull Event event, @Nonnull LocalDateTime airDateTime, long numberOfTickets){
         if (!user.isAnonymous() && null != user.getBirthday()){
             LocalDate eventDay = LocalDate.of(airDateTime.getYear(), airDateTime.getMonth(), airDateTime.getDayOfMonth());
-            LocalDate adjustedBirthday = user.getBirthday().withYear(LocalDate.now().getYear());
+            LocalDate adjustedBirthday = user.getBirthday().withYear(eventDay.getYear());
             adjustYearInAboutNewYear(eventDay, adjustedBirthday);
 
-            if ( eventDay.plusDays(DAYS_RANGE).isAfter(adjustedBirthday) &&
+            if (eventDay.plusDays(DAYS_RANGE).isAfter(adjustedBirthday) &&
                     eventDay.minusDays(DAYS_RANGE).isBefore(adjustedBirthday) ){
                 return BIRTHDAY_DISCOUNT;
             }

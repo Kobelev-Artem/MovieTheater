@@ -1,10 +1,11 @@
 package ua.epam.spring.hometask.dao.impl.mock;
 
-import ua.epam.spring.hometask.dao.EventDao;
-import ua.epam.spring.hometask.domain.Event;
+import static ua.epam.spring.hometask.constants.Constants.Events.BEST_MOVIE_EVENT_NAME;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +14,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import ua.epam.spring.hometask.dao.EventDao;
+import ua.epam.spring.hometask.domain.Event;
+import ua.epam.spring.hometask.domain.EventRating;
+import ua.epam.spring.hometask.service.AuditoriumService;
+
 public class EventDaoMock implements EventDao{
+
+    @Resource
+    private AuditoriumService auditoriumService;
 
     private static List<Event> events = new ArrayList<>();
 
@@ -62,5 +71,24 @@ public class EventDaoMock implements EventDao{
     @Override
     public Collection<Event> getAll() {
         return events;
+    }
+
+    @PostConstruct
+    public void initEvents(){
+        Event event = new Event();
+        event.addAirDateTime(LocalDateTime.now(), auditoriumService.getAll().iterator().next());
+        event.setName(BEST_MOVIE_EVENT_NAME);
+        event.setRating(EventRating.MID);
+        event.setBasePrice(30d);
+
+        events.add(event);
+    }
+
+    public AuditoriumService getAuditoriumService() {
+        return auditoriumService;
+    }
+
+    public void setAuditoriumService(AuditoriumService auditoriumService) {
+        this.auditoriumService = auditoriumService;
     }
 }

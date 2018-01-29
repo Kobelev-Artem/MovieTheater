@@ -1,6 +1,7 @@
 package ua.epam.spring.hometask.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -14,6 +15,17 @@ import ua.epam.spring.hometask.domain.User;
  * @author Yuriy_Tkach
  */
 public interface BookingService {
+
+    /**
+     * Getting price when buying all supplied seats for particular event
+     *
+     * @param tickets
+     *            Tickets to get tickets info
+     * @param user
+     *            User that buys ticket could be needed to calculate discount.
+     *            Can be <code>null</code>
+     */
+    double getTicketsPrice(@Nonnull List<Ticket> tickets, @Nullable User user);
 
     /**
      * Getting price when buying all supplied seats for particular event
@@ -40,7 +52,7 @@ public interface BookingService {
      * @param tickets
      *            Set of tickets
      */
-    void bookTickets(@Nonnull Set<Ticket> tickets);
+    void bookTickets(@Nonnull Set<Ticket> tickets, @Nonnull User user);
 
     /**
      * Getting all purchased tickets for event on specific air date and time

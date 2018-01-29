@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import javax.annotation.Resource;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,15 @@ public class BookingServiceImpl implements BookingService {
     private DiscountService discountService;
 
     @Override
+    public double getTicketsPrice(@Nonnull List<Ticket> tickets, @Nullable User user){
+        double totalPrice = 0;
+        for (Ticket ticket : tickets){
+            totalPrice += getTicketsPrice(ticket.getEvent(), ticket.getDateTime(), user, Set.of(ticket.getSeat()));
+        }
+        return totalPrice;
+    }
+
+    @Override
     public double getTicketsPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user, @Nonnull Set<Long> seats) {
         checkCorrectDateAndAuditorium(event, dateTime);
 
@@ -36,27 +46,25 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private double applyDiscountToPrice(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nullable User user, @Nonnull Set<Long> seats, double price) {
-        price = price * (1 - discountService.getDiscount(user, event, dateTime, seats.size()) / 100);
-        return price;
+        return price * (1 - discountService.getDiscount(user, event, dateTime, seats.size()) / 100);
     }
 
     private double multiplyPriceForVIPSeats(@Nonnull Event event, @Nonnull LocalDateTime dateTime, @Nonnull Set<Long> seats, double price) {
         Auditorium auditorium = event.getAuditoriums().get(dateTime);
         long vipSeatsCount = seats.stream().filter(s -> auditorium.getVipSeats().contains(s)).count();
-        price = price * (seats.size() + vipSeatsCount);
-        return price;
+        return price * (seats.size() + vipSeatsCount);
     }
 
     private double multiplyPriceForWeekend(@Nonnull LocalDateTime dateTime, double basePrice) {
         if (DayOfWeek.SATURDAY.equals(dateTime.getDayOfWeek()) || DayOfWeek.SUNDAY.equals(dateTime.getDayOfWeek())){
-            basePrice = basePrice * WEEKEND_FACTOR;
+            basePrice *= WEEKEND_FACTOR;
         }
         return basePrice;
     }
 
     private double multiplyPriceForHighRatedMovies(@Nonnull Event event, double basePrice) {
         if (null != event.getRating() && EventRating.HIGH.equals(event.getRating())){
-            basePrice = basePrice * HIGH_RATING_FACTOR;
+            basePrice *= HIGH_RATING_FACTOR;
         }
         return basePrice;
     }
@@ -71,6 +79,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     //TODO get current user from session
+    @Override
     public void bookTickets(@Nonnull Set<Ticket> tickets, @Nonnull User user){
         for (Ticket ticket : tickets){
             bookTicket(ticket, user);
@@ -88,10 +97,5 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Set<Ticket> getPurchasedTicketsForEvent(@Nonnull Event event, @Nonnull LocalDateTime dateTime){
         return event.getPurchasedTickets().stream().filter(t -> t.getDateTime().equals(dateTime)).collect(Collectors.toSet());
-    }
-
-    @Override
-    public void bookTickets(@Nonnull Set<Ticket> tickets) {
-        throw new UnsupportedOperationException("Not implemented yet");
     }
 }
