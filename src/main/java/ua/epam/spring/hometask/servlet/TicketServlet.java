@@ -20,7 +20,6 @@ import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.BookingService;
 
-
 public class TicketServlet extends HttpServlet {
 
     @Autowired
@@ -48,6 +47,7 @@ public class TicketServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currentUser = (User)request.getSession().getAttribute(USER_SESSION_PARAM);
@@ -62,7 +62,7 @@ public class TicketServlet extends HttpServlet {
         request.getSession().setAttribute(TICKET_SESSION_PARAM, ticket);
         request.getSession().setAttribute(TOTAL_PRICE_SESSION_PARAM, bookingService.getTicketsPrice(List.of(ticket), currentUser));
 
-        request.getRequestDispatcher(CHECKOUT_PAGE).forward(request, response);
+        response.sendRedirect("/myAccount");
     }
 
     @Override

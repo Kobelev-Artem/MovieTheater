@@ -11,6 +11,5 @@ public class WebConstants {
     public static final String MY_ACCOUNT_PAGE = "WEB-INF/jsp/myAccount.jsp";
     public static final String ADMIN_PAGE = "WEB-INF/jsp/admin.jsp";
     public static final String TICKETS_PAGE = "WEB-INF/jsp/tickets.jsp";
-    public static final String CHECKOUT_PAGE = "WEB-INF/jsp/checkout.jsp";
 
 }

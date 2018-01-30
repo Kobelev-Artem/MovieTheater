@@ -17,10 +17,5 @@
         <button type="submit" value="Buy ticket" >Buy ticket</button>
     </form>
 
-    Tickets: <br/>
-    <c:forEach var = "ticket" items="${user.tickets}">
-        Ticket = ${ticket} <br/>
-    </c:forEach>
-
 </body>
 </html>
