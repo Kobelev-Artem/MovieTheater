@@ -61,9 +61,9 @@ public class UserServiceImplIntegrationTest {
     @Test
     public void shouldRemoveUser(){
         userService.save(markTwain);
-        assertEquals(1, userService.getAll().size());
+        int usersCount = userService.getAll().size();
         userService.remove(markTwain);
-        assertEquals(0, userService.getAll().size());
+        assertEquals(usersCount - 1, userService.getAll().size());
     }
 
     public void assertUserByNameAndEmailAndBirthday(User expectedUser, User actualUser){
