@@ -49,7 +49,7 @@ public class TicketServlet extends HttpServlet {
      */
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User currentUser = (User)request.getSession().getAttribute(USER_SESSION_PARAM);
         String eventName = request.getParameter("eventName");
         Event event = eventDao.getByName(eventName);

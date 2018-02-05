@@ -38,14 +38,14 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>AuditoriumServlet</servlet-name>
         <servlet-class>ua.epam.spring.hometask.servlet.AuditoriumServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AuditoriumServlet</servlet-name>
         <url-pattern>/auditoriums/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -63,24 +63,6 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-
-    <!--<servlet>
-        <servlet-name>HomePageServlet</servlet-name>
-        <servlet-class>ua.epam.spring.hometask.servlet.HomePageServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HomePageServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>-->
-
-    <servlet>
-        <servlet-name>MyAccountServlet</servlet-name>
-        <servlet-class>ua.epam.spring.hometask.servlet.MyAccountServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MyAccountServlet</servlet-name>
-        <url-pattern>/myAccount</url-pattern>
     </servlet-mapping>
 
     <servlet>
