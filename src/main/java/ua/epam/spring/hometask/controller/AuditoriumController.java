@@ -10,7 +10,8 @@ import ua.epam.spring.hometask.service.AuditoriumService;
 import javax.annotation.Resource;
 import java.util.Set;
 
-@Controller(value = "/auditoriums")
+@RequestMapping(value = "/auditoriums")
+@Controller
 public class AuditoriumController {
 
     @Resource

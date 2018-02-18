@@ -22,7 +22,7 @@ import ua.epam.spring.hometask.service.impl.BookingServiceImpl;
 import ua.epam.spring.hometask.service.strategy.DiscountStrategy;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/applicationContext.xml"})
 public class BookingServiceImplIntegrationTest {
 
     private static final double BASE_PRICE = 100d;

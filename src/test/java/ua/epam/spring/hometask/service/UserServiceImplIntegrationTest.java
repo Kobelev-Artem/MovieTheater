@@ -16,7 +16,7 @@ import ua.epam.spring.hometask.domain.User;
 import ua.epam.spring.hometask.service.impl.UserServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/applicationContext.xml"})
 public class UserServiceImplIntegrationTest {
 
     private static final String MARK_TWAIN_EMAIL = "mark.twain@email.com";

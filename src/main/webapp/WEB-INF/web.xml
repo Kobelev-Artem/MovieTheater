@@ -18,7 +18,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/webContext.xml
+            /WEB-INF/applicationContext.xml
         </param-value>
     </context-param>
 
@@ -37,15 +37,6 @@
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
-    <!--<servlet>
-        <servlet-name>AuditoriumServlet</servlet-name>
-        <servlet-class>ua.epam.spring.hometask.servlet.AuditoriumServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AuditoriumServlet</servlet-name>
-        <url-pattern>/auditoriums/*</url-pattern>
-    </servlet-mapping>-->
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>

@@ -3,7 +3,6 @@ package ua.epam.spring.hometask.servlet;
 import static ua.epam.spring.hometask.constants.WebConstants.AUDITORIUM_PAGE;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.servlet.ServletConfig;
@@ -17,7 +16,6 @@ import java.util.Set;
 import ua.epam.spring.hometask.domain.Auditorium;
 import ua.epam.spring.hometask.service.AuditoriumService;
 
-@Configurable
 public class AuditoriumServlet extends HttpServlet {
 
     @Autowired

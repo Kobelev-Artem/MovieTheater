@@ -15,7 +15,7 @@ import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml"})
+@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/applicationContext.xml"})
 public class DiscountServiceImplIntegrationTest {
 
     private static double DELTA = 0.001d;
