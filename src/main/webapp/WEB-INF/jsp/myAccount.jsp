@@ -12,7 +12,7 @@
         Hello, ${user.firstName}
     </h1>
 
-    Last ticket price: ${sessionScope.get('totalPrice')}<br/><br/>
+    Last ticket price: ${totalPrice}<br/><br/>
 
     My Tickets: <br/>
     <c:forEach var = "ticket" items="${user.tickets}">
