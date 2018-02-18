@@ -2,10 +2,7 @@ package ua.epam.spring.hometask.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 import ua.epam.spring.hometask.domain.Event;
 import ua.epam.spring.hometask.domain.Ticket;
 import ua.epam.spring.hometask.domain.User;
@@ -30,12 +27,12 @@ public class BookingController {
     @Resource
     private EventService eventService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String ticketsPage(){
         return "tickets";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public String bookTicket(Model model, @SessionAttribute(value = USER_SESSION_PARAM) User user, @RequestParam String eventName, @RequestParam long seat){
         Event event = eventService.getByName(eventName);
 
